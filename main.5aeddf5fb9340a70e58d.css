@@ -1,0 +1,1 @@
+.content{display:flex;width:80vw;max-width:1080px;margin:0 auto;font-family:Tahoma,Arial,sans-serif}.table{margin-left:10px;width:40vw}@media only screen and (max-width:900px){.content{flex-direction:column}.table{width:80vw}}.grid{padding-right:10px}.grid__row{display:flex;justify-content:space-between;margin-bottom:10px}
