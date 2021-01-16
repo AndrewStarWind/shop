@@ -9,13 +9,11 @@ export default class Goods extends BaseComponent {
 
   renderItem(item) {
     return `
+    <div class="grid__content">
       <span>
         Осталось ${+item.amount - (item.inCart || 0)} ${item.productName} по ${item.price} рублей
       </span>
-      <button
-        class="grid__actionButton addToCart"
-        ${item.inCart >= +item.maxPerPerson ? 'disabled title="Превышено количество позиций на пользовтеля"' : ''}>
-        Добавить в корзину
-      </button>`;
+    </div>
+    <button class="grid__actionButton grid__actionButton_main addToCart">Добавить в корзину</button>`;
   }
 }

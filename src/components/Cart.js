@@ -13,19 +13,28 @@ export default class Cart extends BaseComponent {
       );
       return `В корзине ${quantity} товаров на сумму ${sum}`;
     }
-    return 'В корзине нет товаров';
+    return 'Корзина пуста';
   }
 
   renderItem(cartItem, index) {
-    return `<span>№${index + 1} ${cartItem.item.productName}</span>
-      ${+cartItem.quantity > 1 ? '<button class="grid__actionButton decreseCount">-</button>' : ''}
-      <span> ${cartItem.quantity} </span>
-      ${
-        +cartItem.quantity < +cartItem.item.maxPerPerson && +cartItem.quantity < +cartItem.item.amount
-          ? '<button class="grid__actionButton increaseCount">+</button>'
-          : ''
-      }
-      <span> на сумму ${+cartItem.quantity * +cartItem.item.price} рублей </span>
-      <button class="grid__actionButton deleteItem">удалить</button>`;
+    return `
+      <div class="grid__content">
+        <span>№${index + 1} ${cartItem.item.productName}</span>
+        <button
+        class="grid__actionButton decreseCount"
+        ${+cartItem.quantity === 1 && 'disabled'}
+        >-</button>
+        <span> ${cartItem.quantity} </span>
+        <button
+          class="grid__actionButton increaseCount"
+          ${
+            (+cartItem.quantity >= +cartItem.item.maxPerPerson
+            || +cartItem.quantity  >= +cartItem.item.amount)
+            && 'disabled title="Превышено количество доступных товаров на пользователя"'
+          }
+        >+</button>
+        <span> на сумму ${+cartItem.quantity * +cartItem.item.price} рублей </span>
+      </div>
+      <button class="grid__actionButton grid__actionButton_main deleteItem">удалить</button>`;
   }
 }

@@ -77,9 +77,11 @@ export default class DataStorage {
    */
   addToCart(id, count) {
     const cartItem = this.cartItems.find((item) => item.id === id);
+    const goodsItem = this.goodsItems.find((item) => item.id === id)
+    const maxCount = +goodsItem.maxPerPerson;
 
-    if (cartItem && cartItem.quantity >= cartItem.item.maxPerPerson) {
-      throw new Error('Превышена квота на товары');
+    if (count > maxCount || cartItem?.quantity >= maxCount) {
+      throw new Error('Превышено количество доступных товаров на пользователя');
     }
     this.cartApi.addToCart(id, count);
   }

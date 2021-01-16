@@ -69,6 +69,13 @@ import './index.css';
     goods.initActionHandlers();
     cart.initActionHandlers();
     renderItems();
-    window.addEventListener('beforeunload', () => storage.saveCart());
+
+
+    // для мобильного сафари
+    if (navigator && (navigator.userAgent.match(/iPad/i)|| navigator.userAgent.match(/iPhone/i))) {
+      window.addEventListener('pagehide', () => storage.saveCart());
+    } else {
+      window.addEventListener('beforeunload', () => storage.saveCart());
+    }
   }
 })();
